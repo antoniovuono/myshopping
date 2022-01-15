@@ -11,3 +11,5 @@ Jan 15, 2022 12:41:40 PM io.gapi.emulators.netty.HttpVersionRoutingHandler chann
 INFO: Detected non-HTTP/2 connection.
 Jan 15, 2022 12:41:40 PM io.gapi.emulators.netty.NotFoundHandler handleRequest
 INFO: Unknown request URI: /favicon.ico
+*** shutting down gRPC server since JVM is shutting down
+*** server shut down

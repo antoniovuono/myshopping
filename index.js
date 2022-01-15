@@ -6,11 +6,11 @@ import firestore from '@react-native-firebase/firestore';
 
 import App from './App';
 
-if (__DEV__) {
-    firestore().useEmulator('192.168.1.105', 8080);
-  }
+// if (__DEV__) {
+//     firestore().useEmulator('192.168.1.105', 8080);
+//   }
   
-const db = firestore();
+// const db = firestore();
 
 
 // registerRootComponent calls AppRegistry.registerComponent('main', () => App);
