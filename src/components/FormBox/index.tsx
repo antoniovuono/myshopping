@@ -19,7 +19,7 @@ export function FormBox() {
         done: false,
       })
       .then(() => {
-        Alert.alert("Produto adicionado com sucesso!");
+        Alert.alert("Produto adicionado com sucesso");
       })
       .catch((error) => console.log("Error"));
   }
