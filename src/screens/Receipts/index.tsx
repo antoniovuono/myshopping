@@ -17,7 +17,13 @@ export function Receipts() {
 
     const info = await storage().ref(path).getMetadata();
 
-    setPhotoInfo(`Upload realizado em ${info.timeCreated}`);
+    const foramtedInfoDate = Intl.DateTimeFormat("pt-BR", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "2-digit",
+    }).format(new Date(info.timeCreated));
+
+    setPhotoInfo(`Upload realizado em ${foramtedInfoDate}`);
   }
 
   useEffect(() => {
