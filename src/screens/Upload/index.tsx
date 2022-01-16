@@ -11,7 +11,7 @@ import { Alert } from "react-native";
 export function Upload() {
   const [image, setImage] = useState("");
   const [bytesTransferred, setBytesTransferred] = useState("");
-  const [progress, setProgress] = useState(0);
+  const [progress, setProgress] = useState("0");
 
   async function handlePickImage() {
     const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -31,12 +31,25 @@ export function Upload() {
 
   async function handleUpload() {
     const fileName = new Date().getTime();
-    const reference = storage().ref(`/images/${fileName}`);
+    const reference = storage().ref(`/images/${fileName}.png`);
 
-    reference
-      .putFile(image)
-      .then(() => Alert.alert("Upload concluído"))
-      .catch((error) => console.error(error));
+    const uploadTask = reference.putFile(image);
+    uploadTask.on("state_changed", (taskSnapshot) => {
+      const percent = (
+        (taskSnapshot.bytesTransferred / taskSnapshot.totalBytes) *
+        100
+      ).toFixed(0);
+
+      setProgress(percent);
+
+      setBytesTransferred(
+        `${taskSnapshot.bytesTransferred} transferidos de ${taskSnapshot.totalBytes}`
+      );
+    });
+
+    uploadTask.then(() => {
+      Alert.alert("Upload concluído com sucesso!");
+    });
   }
 
   return (
