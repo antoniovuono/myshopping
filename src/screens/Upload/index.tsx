@@ -47,7 +47,10 @@ export function Upload() {
       );
     });
 
-    uploadTask.then(() => {
+    uploadTask.then(async () => {
+      const imgaeUrl = await reference.getDownloadURL();
+      // console.log(imgaeUrl);
+
       Alert.alert("Upload concluído com sucesso!");
     });
   }
