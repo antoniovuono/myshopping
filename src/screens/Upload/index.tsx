@@ -10,6 +10,8 @@ import { Alert } from "react-native";
 
 export function Upload() {
   const [image, setImage] = useState("");
+  const [bytesTransferred, setBytesTransferred] = useState("");
+  const [progress, setProgress] = useState(0);
 
   async function handlePickImage() {
     const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -46,9 +48,9 @@ export function Upload() {
 
         <Button title="Fazer upload" onPress={handleUpload} />
 
-        <Progress>0%</Progress>
+        <Progress>{progress}%</Progress>
 
-        <Transferred>0 de 100 bytes transferido</Transferred>
+        <Transferred>{bytesTransferred}</Transferred>
       </Content>
     </Container>
   );
