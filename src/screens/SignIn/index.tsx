@@ -27,14 +27,26 @@ export function SignIn() {
           Alert.alert(
             "Este e-mail já está em uso. Escolha outro e-mail para cadastrar!"
           );
-        }
-
-        if (error.code === "auth/invalid-email") {
+        } else if (error.code === "auth/invalid-email") {
           Alert.alert("E-mail inválido!");
-        }
-
-        if (error.code === "auth/weak-password") {
+        } else if (error.code === "auth/weak-password") {
           Alert.alert("A senha deve conter 6 dígitos ou mais!");
+        }
+      });
+  }
+
+  function handleSignInWithEmailAndPassword() {
+    auth()
+      .signInWithEmailAndPassword(email, password)
+      .then(({ user }) => console.log(user))
+      .catch((error) => {
+        console.log(error.code);
+        if (error.code === "auth/wrong-password") {
+          Alert.alert("A senha foi está incorreta!");
+        } else if (error.code === "auth/invalid-email") {
+          Alert.alert("E-mail nāo é válido!");
+        } else if (error.code === "auth/user-not-found") {
+          Alert.alert("Usuário nāo encontrado!");
         }
       });
   }
@@ -52,7 +64,7 @@ export function SignIn() {
 
       <Input placeholder="senha" secureTextEntry onChangeText={setPassword} />
 
-      <Button title="Entrar" onPress={handleSignInAnonymous} />
+      <Button title="Entrar" onPress={handleSignInWithEmailAndPassword} />
 
       <Account>
         <ButtonText title="Recuperar senha" onPress={() => {}} />
